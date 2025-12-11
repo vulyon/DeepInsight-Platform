@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- 保持代码简洁
+- 奥卡姆剃刀原则，如无必要，勿增实体
+- 不写与当前需求无关的代码

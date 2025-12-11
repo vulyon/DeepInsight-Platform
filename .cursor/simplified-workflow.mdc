@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- 不要写任何的 test 测试脚本
+- 不要生成 markdown 文件记录修改结果
+- 修改已有代码时，不要考虑任何向前、向后兼容性问题，进行彻底重构

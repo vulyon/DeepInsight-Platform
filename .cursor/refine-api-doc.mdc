@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+当前 HTTP 服务基于 FastAPI 和 Pydantic BaseModel, 完善相关代码和文档
+- 遵循 Pydantic v2 最佳实践
+- 完善 FastAPI 支持的2种 API 文档界面 Swagger UI 和 ReDoc

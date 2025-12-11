@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+日志输出使用 logging 包, 不要使用 print 函数
+
+代码中的日志输出请使用英文，比如:
+- logging.info("English")
+- logger.info("English")
+- raise ValueError("English")
+
+但是!用中文写注释和 docstring.
+
+英文单词前后和中文字符有1个空格，符合英文书写习惯
+
+输出2个以上 metrics、config 或者其他 key-value 结果时
+- 以 JSON 格式输出，JSON 字符串之前可以有文字简要描述
+- 如果 key-value 数据需要被其他代码使用，合并为一个 dict 再以 JSON 格式输出，以便代码复用
