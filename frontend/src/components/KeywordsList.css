@@ -1,0 +1,18 @@
+.keywords-card {
+  height: 100%;
+}
+
+.keywords-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.keyword-tag {
+  font-size: 14px;
+  padding: 4px 12px;
+  margin: 4px 0;
+  cursor: default;
+}
+

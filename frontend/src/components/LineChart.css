@@ -1,0 +1,10 @@
+.line-chart-card {
+  height: 100%;
+}
+
+.line-chart {
+  width: 100%;
+  height: 400px;
+  min-height: 400px;
+}
+

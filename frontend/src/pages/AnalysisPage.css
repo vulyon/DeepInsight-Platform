@@ -1,0 +1,19 @@
+.analysis-page {
+  width: 100%;
+}
+
+.analysis-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.analysis-header {
+  margin-bottom: 24px;
+}
+
+.analysis-header .ant-alert {
+  margin-top: 16px;
+}
+
