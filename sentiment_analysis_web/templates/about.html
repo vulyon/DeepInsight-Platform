@@ -116,7 +116,7 @@
 
       <div class="section-title">
         <h2>关于系统</h2>
-        <p>电商产品评论情感分析系统</p>
+        <p>基于LSTM的电商产品评论情感分析及其可视化设计</p>
       </div>
 
       <div class="row about-content">
@@ -125,10 +125,11 @@
           <div class="about-card">
             <h3><i class="icofont-info-circle"></i> 系统介绍</h3>
             <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">
-              本系统是一个基于Python Flask框架开发的电商产品评论情感分析平台，旨在帮助商家和用户快速了解产品评论的情感倾向，为产品改进和购买决策提供数据支持。
+              本系统是一个基于Python Flask框架和LSTM深度学习模型开发的电商产品评论情感分析平台。系统采用长短期记忆网络（LSTM）对评论文本进行情感分类，能够有效捕捉文本中的长期依赖关系，提高情感分析的准确性。系统旨在帮助商家和用户快速了解产品评论的情感倾向，为产品改进和购买决策提供数据支持。
             </p>
             <h4 style="color: #2c3e50; margin-top: 25px; margin-bottom: 15px;">主要功能：</h4>
             <ul>
+              <li>基于LSTM的评论情感分类</li>
               <li>评论数据管理和展示</li>
               <li>情感倾向分析（正面/负面）</li>
               <li>情感分布统计可视化</li>
@@ -152,12 +153,18 @@
               <span class="tech-badge">ECharts</span>
               <span class="tech-badge">jQuery</span>
             </div>
-            <div>
+            <div style="margin-bottom: 20px;">
               <h4 style="color: #2c3e50; margin-bottom: 15px;">数据分析：</h4>
               <span class="tech-badge">Pandas</span>
               <span class="tech-badge">Jieba</span>
               <span class="tech-badge">WordCloud</span>
               <span class="tech-badge">Scikit-learn</span>
+            </div>
+            <div>
+              <h4 style="color: #2c3e50; margin-bottom: 15px;">深度学习：</h4>
+              <span class="tech-badge">LSTM</span>
+              <span class="tech-badge">TensorFlow/Keras</span>
+              <span class="tech-badge">Embedding</span>
             </div>
           </div>
         </div>
@@ -169,6 +176,7 @@
             <div class="row">
               <div class="col-md-6">
                 <ul>
+                  <li>基于LSTM深度学习模型，情感分类准确率高</li>
                   <li>支持大量评论数据的存储和查询</li>
                   <li>实时情感分析统计</li>
                 </ul>
@@ -177,6 +185,33 @@
                 <ul>
                   <li>直观的数据可视化展示</li>
                   <li>响应式设计，支持多设备访问</li>
+                  <li>支持文本预处理和特征提取</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LSTM模型说明 -->
+        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+          <div class="about-card">
+            <h3><i class="icofont-brain"></i> LSTM模型说明</h3>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">
+              LSTM（Long Short-Term Memory，长短期记忆网络）是一种特殊的循环神经网络（RNN），能够有效解决传统RNN在处理长序列时的梯度消失问题。在情感分析任务中，LSTM能够：
+            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li>捕捉文本中的长期依赖关系</li>
+                  <li>理解上下文语境，提高分类准确性</li>
+                  <li>处理变长文本序列</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li>自动学习文本特征表示</li>
+                  <li>适应不同领域的评论数据</li>
+                  <li>提供可解释的情感分析结果</li>
                 </ul>
               </div>
             </div>
