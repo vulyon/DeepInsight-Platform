@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="static/assets/js/echarts.min.js"></script>
+
+  <title>情感统计 - 电商产品评论情感分析系统</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/assets/img/favicon.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="/index"><span>情感分析</span></a></h1>
+      </div>
+
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li><a href="/index">首页<i class="la la-angle-down"></i></a></li>
+          <li><a href="/reviews">评论列表</a></li>
+          <li class="active"><a href="/sentiment">情感统计</a></li>
+          <li><a href="/wordcloud">词云分析</a></li>
+          <li><a href="/about">关于</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Our Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+        <!-- ======= Counts Section ======= -->
+    <section class="counts section-bg">
+      <div class="container">
+            <div class="section-title">
+                <h2>情感分布统计</h2>
+            </div>
+            {% if error_msg %}
+            <div class="alert alert-warning" role="alert">
+                <strong>提示：</strong>{{ error_msg }}
+            </div>
+            {% elif total_count == 0 %}
+            <div class="alert alert-info" role="alert">
+                <strong>提示：</strong>暂无统计数据，请先运行 init_db.py 初始化数据库
+            </div>
+            {% else %}
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="main" style="width: 100%;height:400px"></div>
+            <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 准备数据
+        var labels = {{ labels|tojson }};
+        var values = {{ values|tojson }};
+        
+        var data = [
+            {value: values[0], name: labels[0]},
+            {value: values[1], name: labels[1]}
+        ];
+
+        // 指定图表的配置项和数据
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: labels
+            },
+            series: [
+                {
+                    name: '情感分布',
+                    type: 'pie',
+                    radius: '60%',
+                    center: ['50%', '55%'],
+                    data: data,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        </script>
+            {% endif %}
+      </div>
+        </section><!-- End Counts Section -->
+        <section class="counts section-bg">
+
+        <div class="container">
+            <div class="section-title">
+                <h2>情感统计详情</h2>
+            </div>
+            {% if not error_msg and total_count > 0 %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">正面评论</h5>
+                            <h2 class="text-success">{{ pos_count }}</h2>
+                            <p class="text-muted">占比: {% if total_count > 0 %}{{ "%.1f"|format(pos_count/total_count*100) }}%{% else %}0%{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">负面评论</h5>
+                            <h2 class="text-danger">{{ neg_count }}</h2>
+                            <p class="text-muted">占比: {% if total_count > 0 %}{{ "%.1f"|format(neg_count/total_count*100) }}%{% else %}0%{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">评论总数</h5>
+                            <h2 class="text-info">{{ total_count }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </section><!-- End Counts Section -->
+
+      </div>
+    </section><!-- End Our Team Section -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>电商评论情感分析系统</span></strong>. All Rights Reserved
+      </div>
+    
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="static/assets/vendor/venobox/venobox.min.js"></script>
+  <script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="static/assets/vendor/counterup/counterup.min.js"></script>
+  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
